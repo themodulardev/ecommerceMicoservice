@@ -1,0 +1,42 @@
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a routerLink="/" class="nav-link px-2 text-secondary">Home</a></li>
+        <li><a routerLink="/categories" class="nav-link px-2 text-white">Categories</a></li>
+        <!-- <li><a routerLink="" class="nav-link px-2 text-white">Pricing</a></li>
+          <li><a routerLink="" class="nav-link px-2 text-white">FAQs</a></li> -->
+        <li><a routerLink="/about" class="nav-link px-2 text-white">About</a></li>
+      </ul>
+
+      <form class="col-12 col-lg-4 mb-3 mb-lg-0 me-lg-3">
+        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+      </form>
+
+      <div class="text-end">
+        <!-- add icons profile and cart  -->
+        <!-- <i-feather name="github" class="someclass"></i-feather> -->
+        <div class="d-flex gap-5">
+          <div class="cart-container" (click)="toggleDropdown()" (clickOutside)="isDropdownOpen = false">
+            <div class="badge">{{cartItemCount}}</div>
+            <i-feather name="shopping-cart" class="cart-icon" ></i-feather>
+
+            <div class="cart-dropdown" [class.show]="isDropdownOpen">
+              <p *ngIf="cartItems.length === 0" class="empty">Your cart is empty</p>
+              <ul *ngIf="cartItems.length > 0">
+                <li *ngFor="let item of cartItems">{{ item.name }} - ₹{{ item.price }}</li>
+              </ul>
+              <button *ngIf="cartItems.length > 0" class="checkout-btn">Checkout</button>
+            </div>
+          </div>
+
+          <div>
+            <i-feather name="user" class="someclass"></i-feather>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

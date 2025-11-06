@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  background-color: #1e1e1e;
+  padding: 6px 0;
+}
+
+.brand-carousel-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for clean look */
+.brand-carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-carousel {
+  display: flex;
+  align-items: center;
+  gap: 30px; /* space between brands */
+  padding: 0 20px;
+}
+
+.brand-item {
+  flex: 0 0 auto; /* prevent shrinking */
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.brand-item:hover {
+  transform: scale(1.1);
+}
+
+.brand-item img {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+}
