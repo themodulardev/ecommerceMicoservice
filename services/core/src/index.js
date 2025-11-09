@@ -9,6 +9,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 const app = express();
+import { userRoutes } from "./modules/user/index.js";
 
 // 🔐 Security & performance middlewares
 app.use(helmet());
@@ -39,7 +40,7 @@ passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
 }));
 
 app.use(passport.initialize());
-
+app.use("/api/users", userRoutes);
 // 🌐 Routes
 app.get('/', (req, res) => res.send('Hello from core service!'));
 

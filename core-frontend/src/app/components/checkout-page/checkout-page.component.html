@@ -1,1 +1,123 @@
-<p>checkout-page works!</p>
+<div class="container py-4">
+  <!-- Header -->
+  <div class="checkout-header bg-secondary text-white rounded-3 p-3 mb-4 d-flex justify-content-between align-items-center">
+    <h4 class="fw-bold mb-0">Checkout</h4>
+    <a routerLink="/cart" class="text-white text-decoration-none">
+      <!-- <i class="bi bi-arrow-left"></i> Back to Cart -->
+    </a>
+  </div>
+
+  <div class="row g-4">
+    <!-- Left: Checkout Form -->
+    <div class="col-lg-8">
+      <form [formGroup]="checkoutForm" (ngSubmit)="placeOrder()">
+        <div class="bg-white p-4 rounded-3 shadow-sm mb-4">
+          <h5 class="fw-bold mb-3">Shipping Information</h5>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" formControlName="fullName" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" formControlName="email" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Phone</label>
+              <input type="text" class="form-control" formControlName="phone" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Zip Code</label>
+              <input type="text" class="form-control" formControlName="zip" />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Address</label>
+              <textarea class="form-control" rows="2" formControlName="address"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="bg-white p-4 rounded-3 shadow-sm">
+          <h5 class="fw-bold mb-3">Payment Method</h5>
+
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" formControlName="paymentMethod" value="card" id="card" />
+            <label class="form-check-label" for="card">Credit / Debit Card</label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" formControlName="paymentMethod" value="upi" id="upi" />
+            <label class="form-check-label" for="upi">UPI / Wallet</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" formControlName="paymentMethod" value="cod" id="cod" />
+            <label class="form-check-label" for="cod">Cash on Delivery</label>
+          </div>
+
+          <hr />
+
+          <div *ngIf="checkoutForm.value.paymentMethod === 'card'" class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Card Number</label>
+              <input type="text" class="form-control" formControlName="cardNumber" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Expiry</label>
+              <input type="text" class="form-control" formControlName="expiry" />
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">CVV</label>
+              <input type="password" class="form-control" formControlName="cvv" />
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-4 w-100 fw-bold py-2" type="submit">
+            Place Order
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Right: Cart Summary -->
+    <div class="col-lg-4">
+      <div class="bg-white p-3 rounded-3 shadow-sm">
+        <h5 class="fw-bold border-bottom pb-2">Your Cart</h5>
+
+        <div *ngFor="let item of cart; let i = index" class="d-flex align-items-center mt-3 border-bottom pb-2">
+          <img [src]="item.image" alt="{{ item.name }}" width="60" class="rounded me-3" />
+          <div class="flex-grow-1">
+            <h6 class="mb-0">{{ item.name }}</h6>
+            <small class="text-muted">Qty: {{ item.quantity }}</small>
+          </div>
+          <div class="text-end">
+            <strong>₹{{ item.price * item.quantity }}</strong><br />
+            <button class="btn btn-sm btn-outline-danger mt-1" (click)="removeItem(i)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <div class="d-flex justify-content-between">
+            <span>Subtotal</span>
+            <strong>₹{{ subtotal }}</strong>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span>Discount</span>
+            <strong>- ₹{{ discount }}</strong>
+          </div>
+          <div class="d-flex justify-content-between">
+            <span>Shipping</span>
+            <strong>₹{{ shipping }}</strong>
+          </div>
+          <hr />
+          <div class="d-flex justify-content-between fw-bold">
+            <span>Total</span>
+            <span class="text-success">₹{{ total }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

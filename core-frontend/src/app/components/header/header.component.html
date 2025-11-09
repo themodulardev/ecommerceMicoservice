@@ -28,7 +28,7 @@
               <ul *ngIf="cartItems.length > 0">
                 <li *ngFor="let item of cartItems">{{ item.name }} - ₹{{ item.price }}</li>
               </ul>
-              <button *ngIf="cartItems.length > 0" class="checkout-btn">Checkout</button>
+              <button *ngIf="cartItems.length > 0" class="checkout-btn" routerLink="/checkout">Checkout</button>
             </div>
           </div>
 
